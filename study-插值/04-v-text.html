@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-text语法</title>
+</head>
+<body>
+
+  <div id="app">
+    <h2>{{message}},余志翔</h2>
+
+    <!--用的较少,不过灵活-->
+    <h2 v-text="message">,余志翔</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello',
+      }
+    })
+  </script>
+
+</body>
+</html>
