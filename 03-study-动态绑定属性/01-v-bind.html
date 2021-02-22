@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind语法</title>
+  <style>
+    .active {
+      color: red;
+    }
+    .active1 {
+      color: green;
+    }
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!--完整写法-->
+  <img v-bind:src="imgUrl" alt="" width="40px" height="30px">
+  <a v-bind:href="hrefUrl">百度一下</a>
+
+  <!--语法糖写法,简写-->
+  <img :src="imgUrl" alt="" width="40px" height="30px">
+  <a :href="hrefUrl">百度一下</a>
+
+  <!--绑定class,少用于不会变的class属性,单一的class属性-->
+  <h2 class="active" v-cloak>{{message}}</h2>
+  <h2 :class="active" v-cloak>{{message}}</h2>
+  <h2></h2>
+
+  <!--对象语法,存放键值对,值为vue实例中管理的值,且会合并写死的class-->
+  <h2 :class="{active1: isActive, line: isLine}" class="test" v-cloak>{{message}}</h2>
+  <h2 :class="getClasses()" class="test" v-cloak>{{message}}</h2>
+  <button @click="btnClick">按钮</button>
+
+  <!--数组语法-->
+  <!--加引号和写死无差别-->
+  <h2 :class="['active2', 'line']" class="test" v-cloak>{{message}}</h2>
+  <!--不加引号为vue实例中的data值-->
+  <h2 :class="[active2, line]" class="test" v-cloak>{{message}}</h2>
+  <button @click="btnClick">按钮</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+      imgUrl: 'https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/54fbb2fb43166d22d552b941432309f79052d23a.jpg',
+      hrefUrl: 'https://www.baidu.com',
+      active: 'active',
+      isActive: true,
+      isLine: true,
+      active2: 'aaaa',
+      line: 'bbbb'
+    },
+    methods: {
+      btnClick: function () {
+        this.isActive = !this.isActive;
+      },
+      getClasses: function () {
+        return {active1: this.isActive, line: this.isLine}
+      }
+    }
+  })
+</script>
+</body>
+</html>
